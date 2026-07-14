@@ -38,7 +38,7 @@ GAIN          = 50
 BUFFER_SIZE   = 1024
 NUM_ROUNDS    = 0
 DELAY_BETWEEN = 0.2
-OUTPUT_CSV    = "rf_capture_log.csv"
+OUTPUT_CSV    = "data/rf_capture_log.csv"
 
 # ─────────────────────────────────────────────
 #  SIGNAL STRENGTH CLASSIFIER

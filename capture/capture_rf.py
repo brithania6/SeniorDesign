@@ -23,7 +23,7 @@ SDR_CONFIG = [
         "ip": "ip:192.168.2.1",
         "frequency": 5.8e9,
         "antenna": "Vivaldi",
-        "role": "Receiver",
+        "role": "RECEIVER",
         "simulated": False
     },
 
@@ -33,7 +33,7 @@ SDR_CONFIG = [
         "ip": "ip:192.168.3.1",
         "frequency": 5.8e9,
         "antenna": "Vivaldi",
-        "role": "Receiver",
+        "role": "RECEIVER",
         "simulated": False
     },
 
@@ -43,7 +43,7 @@ SDR_CONFIG = [
         "ip": "ip:192.168.4.1",
         "frequency": 2.4e9,
         "antenna": "Patch Array",
-        "role": "Receiver",
+        "role": "RECEIVER",
         "simulated": False
     },
 
@@ -53,7 +53,7 @@ SDR_CONFIG = [
         "ip": "ip:192.168.5.1",
         "frequency": 2.4e9,
         "antenna": "Patch Array",
-        "role": "Receiver",
+        "role": "RECEIVER",
         "simulated": False
     }
 
@@ -181,7 +181,6 @@ def connect_sdrs(configs):
 
     for cfg in configs:
 
-        
         if cfg["role"] != "RECEIVER":
             continue
 
@@ -191,9 +190,8 @@ def connect_sdrs(configs):
 
             sdr = adi.Pluto(cfg["ip"])
 
-            
             sdr.sample_rate = int(SAMPLE_RATE)
-            sdr.rx_rf_bandwidth = int(SAMPLE_RATE)
+            sdr.rx_rf_bandwidth = int(RX_BANDWIDTH)
             sdr.rx_lo = int(cfg["frequency"])
             sdr.rx_hardwaregain_chan0 = GAIN
             sdr.rx_buffer_size = BUFFER_SIZE
@@ -213,6 +211,8 @@ def connect_sdrs(configs):
     print(f"Successfully connected to {len(connections)} receiver(s).\n")
 
     return connections
+
+
 # ============================================================
 #               DISPLAY SDR READING
 # ============================================================
@@ -234,6 +234,8 @@ def print_reading(reading):
     print(f"Timestamp    : {reading['timestamp']}")
     print("=" * 60)
     print()
+
+
 # ============================================================
 #                        MAIN PROGRAM
 # ============================================================
@@ -338,3 +340,11 @@ def main():
         print("\nCapture Complete")
         print(f"Rounds Captured : {round_num}")
         print(f"CSV Saved To    : {OUTPUT_CSV}")
+
+
+# ====================================================
+#                  START PROGRAM
+# ====================================================
+
+if __main__ == "__main__":
+    main()
